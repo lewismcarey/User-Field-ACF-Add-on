@@ -401,7 +401,7 @@ class Users_field extends acf_Field
 				$value[$k]['nickname'] = $user_data->nickname;
 				$value[$k]['user_nicename'] = $user_data->user_nicename;
 				$value[$k]['user_email'] = $user_data->user_email;
-				$value[$k]['user_url'] = $user_data->user_nicename;
+				$value[$k]['user_url'] = $user_data->user_url;
 				$value[$k]['user_registered'] = $user_data->user_registered;
 				$value[$k]['user_description'] = $user_data->user_description;
 

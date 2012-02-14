@@ -31,6 +31,20 @@ if(function_exists('register_field')) { // wrap your register field functions in
 	register_field(‘Users_field', dirname(__File__) . '/your-ACF-sub-directory/users_field.php');
 }
 
+=== Data Returned ===
+
++ KEY            ++ DESCRIPTION     +
+
+  ID                User ID
+  user_firstname    First Name
+  user_lastname     Last Name
+  nickname          Nick name
+  user_nicename     Nice name
+  user_email        Email Address
+  user_url          Web Address
+  user_registered   Date Registered
+  user_description  Description
+    
 === Issues === 
 
 Report any issues or feature requests https://github.com/lewismcarey/User-Field-ACF-Add-on/issues
