@@ -23,7 +23,7 @@ The user data stored is an array consisting of the user ID, first name, last nam
 
 Download the User-Field-ACF-Add-on repo to your theme:
 
-* https://github.com/lewismcarey/User-Field-ACF-Add-on 
+* https://github.com/lewismcarey/User-Field-ACF-Add-on/zipball/master
 
 Register the field - register_field($name, $path)
 
