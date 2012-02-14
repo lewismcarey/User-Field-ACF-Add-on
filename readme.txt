@@ -21,13 +21,15 @@ The user data stored is an array consisting of the user ID, first name, last nam
 
 === Installation === 
 
-Download the User-Field-ACF-Add-on repo to your theme:
+* Download or clone the User-Field-ACF-Add-on repo to your theme:
 
-* https://github.com/lewismcarey/User-Field-ACF-Add-on/zipball/master
+https://github.com/lewismcarey/User-Field-ACF-Add-on/blob/master/users_field.php
 
-Register the field - register_field($name, $path)
+* Register the field - register_field($name, $path)
 
-* register_field(‘Users_field', dirname(__File__) . '/your-ACF-sub-directory/users_field.php');
+if(function_exists('register_field')) { // wrap your register field functions in this to prevent your site breaking on an update to the ACF plugin via @shaunbent
+	register_field(‘Users_field', dirname(__File__) . '/your-ACF-sub-directory/users_field.php');
+}
 
 === Issues === 
 
