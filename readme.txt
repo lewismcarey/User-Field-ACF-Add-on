@@ -1,6 +1,7 @@
 === Advanced Custom Fields - Users Multi-Select Field add-on ===
 
 Contributors: by @lewismcarey (@forepoint)
+			  update nicename to displayname - jeradin
 Tags: acf, acf add-on, users, custom field, user field
 Requires at least: 3.0
 Tested up to: 3.3.1
