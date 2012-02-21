@@ -1,13 +1,18 @@
 <?php
 
 /*
- *	Advanced Custom Fields - New field template
+ *	Advanced Custom Fields - Users Multi-Select Field add-on
  *	
- *	Create your field's functionality below and use the function:
- *	register_field($class_name, $file_path) to include the field
- *	in the acf plugin.
- *
- *	Documentation: 
+ * 
+ * Contributors: by @lewismcarey (@forepoint) ,
+ * 				 update nicename to displayname - jeradin
+ * Tags: acf, acf add-on, users, custom field, user field
+ * Requires at least: 3.0
+ * Tested up to: 3.3.1
+ * Stable tag: 0.0
+ * 
+ * Documentation can be found at https://github.com/lewismcarey/User-Field-ACF-Add-on/blob/master/readme.txt
+ * Report any issues or feature requests to https://github.com/lewismcarey/User-Field-ACF-Add-on/issues
  *
  */
  
@@ -223,7 +228,7 @@ class Users_field extends acf_Field
 				foreach($users as $k => $user)
 				{
 					$key = $user->ID;
-					$value = ucfirst($user->user_nicename);
+					$value = ucfirst($user->display_name); 
 					$selected = '';
 					
 					if(is_array($field['value']))
@@ -400,6 +405,7 @@ class Users_field extends acf_Field
 				$value[$k]['user_lastname'] = $user_data->user_lastname;
 				$value[$k]['nickname'] = $user_data->nickname;
 				$value[$k]['user_nicename'] = $user_data->user_nicename;
+				$value[$k]['display_name'] = $user_data->display_name;
 				$value[$k]['user_email'] = $user_data->user_email;
 				$value[$k]['user_url'] = $user_data->user_url;
 				$value[$k]['user_registered'] = $user_data->user_registered;
