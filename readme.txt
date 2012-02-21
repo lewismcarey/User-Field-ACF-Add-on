@@ -40,6 +40,7 @@ if(function_exists('register_field')) { // wrap your register field functions in
   user_lastname     Last Name
   nickname          Nick name
   user_nicename     Nice name
+  display_name     .Display Name
   user_email        Email Address
   user_url          Web Address
   user_registered   Date Registered
