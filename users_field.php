@@ -1,12 +1,15 @@
 <?php
 
 /*
- *	Advanced Custom Fields - Users Multi-Select Field add-on
+ * Advanced Custom Fields - Users Multi-Select Field add-on
  *	
  * 
  * Contributors: by @lewismcarey (@forepoint) ,
- * 				 update nicename to displayname - jeradin
- *               translation issue resolved - eonlova
+ *               update nicename to displayname - jeradin (ACF support)
+ *               translation issue resolved - eonlova (issue 1)
+ *               now includes users.php if using ACF front-end-forms - owsleye (issue 2)
+ *               additional translation issue resolved - Synaestesia (issue 3)
+ *
  * Tags: acf, acf add-on, users, custom field, user field
  * Requires at least: 3.0
  * Tested up to: 3.3.1
@@ -16,7 +19,6 @@
  * Report any issues or feature requests to https://github.com/lewismcarey/User-Field-ACF-Add-on/issues
  *
  */
- 
  
 class Users_field extends acf_Field
 {
@@ -75,14 +77,14 @@ class Users_field extends acf_Field
 			<td>
 <?php 
 				$choices = array('' => '-All-');
-							
 						
 				$editable_roles = get_editable_roles();
 
-				foreach ( $editable_roles as $role => $details ) {
-					
-					$name = translate_user_role( $details['name'] );
-					$choices[$name] = $name;
+				foreach ( $editable_roles as $role => $details ) 
+				{
+										
+					// only translate the output not the value
+					$choices[$details['name']] = translate_user_role( $details['name'] );
 					
 				}
 				
@@ -280,7 +282,11 @@ class Users_field extends acf_Field
 	
 	function admin_head()
 	{
-
+		if ( !function_exists('get_editable_roles') ) 
+		{ 
+			// if using front-end forms then we need to add this core file
+			require_once( ABSPATH . '/wp-admin/includes/user.php' ); 
+		}
 	}
 	
 	
