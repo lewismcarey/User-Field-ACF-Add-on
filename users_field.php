@@ -84,7 +84,7 @@ class Users_field extends acf_Field
 				{
 										
 					// only translate the output not the value
-					$choices[$details['name']] = translate_user_role( $details['name'] );
+					$choices[$role] = translate_user_role( $details['name'] );
 					
 				}
 				
@@ -172,7 +172,7 @@ class Users_field extends acf_Field
 	
 	function create_field($field)
 	{
-	
+		$editable_roles = get_editable_roles();
 		
 		$field['role'] = isset($field['role']) ? $field['role'] : false;
 		$field['multiple'] = isset($field['multiple']) ? $field['multiple'] : false;
@@ -181,15 +181,13 @@ class Users_field extends acf_Field
 		if(!$field['role'] || !is_array($field['role']) || $field['role'][0] == "")
 		{
 			
-			$editable_roles = get_editable_roles();
-			
 			$field['role'] = array();
 			foreach ( $editable_roles as $role => $details ) 
 			{
 				
 				if ($details['name'] != "") 
 				{
-					$field['role'][] = $details['name'] ;
+					$field['role'][] = $role ;
 				}
 			}
 		}
@@ -215,6 +213,7 @@ class Users_field extends acf_Field
 		
 		foreach($field['role'] as $role)
 		{
+			$label = $editable_roles[$role]['name'];
 			// get users
 			$args = array(
 				'role' => $role	
@@ -226,7 +225,7 @@ class Users_field extends acf_Field
 			if($users)
 			{
 				
-				echo '<optgroup label="'.translate_user_role($role).'">';
+				echo '<optgroup label="'.translate_user_role($label).'">';
 
 				foreach($users as $k => $user)
 				{
