@@ -405,18 +405,19 @@ class Users_field extends acf_Field
 			foreach($value as $k => $v)
 			{
 				$user_data = get_userdata($v);
-				$value[$k] = array();
-				$value[$k]['ID'] = $v;
-				$value[$k]['user_firstname'] = $user_data->user_firstname;
-				$value[$k]['user_lastname'] = $user_data->user_lastname;
-				$value[$k]['nickname'] = $user_data->nickname;
-				$value[$k]['user_nicename'] = $user_data->user_nicename;
-				$value[$k]['display_name'] = $user_data->display_name;
-				$value[$k]['user_email'] = $user_data->user_email;
-				$value[$k]['user_url'] = $user_data->user_url;
-				$value[$k]['user_registered'] = $user_data->user_registered;
-				$value[$k]['user_description'] = $user_data->user_description;
-
+				if(isset($user_data) && is_object($user_data)){
+					$value[$k] = array();
+					$value[$k]['ID'] = $v;
+					$value[$k]['user_firstname'] = $user_data->user_firstname;
+					$value[$k]['user_lastname'] = $user_data->user_lastname;
+					$value[$k]['nickname'] = $user_data->nickname;
+					$value[$k]['user_nicename'] = $user_data->user_nicename;
+					$value[$k]['display_name'] = $user_data->display_name;
+					$value[$k]['user_email'] = $user_data->user_email;
+					$value[$k]['user_url'] = $user_data->user_url;
+					$value[$k]['user_registered'] = $user_data->user_registered;
+					$value[$k]['user_description'] = $user_data->user_description;
+				}
 			}
 		}
 		else
