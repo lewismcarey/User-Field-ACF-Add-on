@@ -418,6 +418,7 @@ class Users_field extends acf_Field
 			$value[$k]['user_url'] = $user_data->user_url;
 			$value[$k]['user_registered'] = $user_data->user_registered;
 			$value[$k]['user_description'] = $user_data->user_description;
+			$value[$k]['user_avatar'] = get_avatar( $v );
 
 		}
 			
