@@ -389,43 +389,38 @@ class Users_field extends acf_Field
 		$value = $this->get_value($post_id, $field);
 		
 		// format value
-		
-		if(!$value)
-		{
+		if( ( ! $value ) || ( $value == 'null' ) ) {
+			
 			return false;
+			
 		}
 		
-		if($value == 'null')
-		{
-			return false;
-		}
+		//convert $value to an array if its a single value
 		
-		if(is_array($value))
-		{
-			foreach($value as $k => $v)
-			{
-				$user_data = get_userdata($v);
-				$value[$k] = array();
-				$value[$k]['ID'] = $v;
-				$value[$k]['user_firstname'] = $user_data->user_firstname;
-				$value[$k]['user_lastname'] = $user_data->user_lastname;
-				$value[$k]['nickname'] = $user_data->nickname;
-				$value[$k]['user_nicename'] = $user_data->user_nicename;
-				$value[$k]['display_name'] = $user_data->display_name;
-				$value[$k]['user_email'] = $user_data->user_email;
-				$value[$k]['user_url'] = $user_data->user_url;
-				$value[$k]['user_registered'] = $user_data->user_registered;
-				$value[$k]['user_description'] = $user_data->user_description;
+		if( ! is_array( $value ) ) {
 
-			}
+			$value = (array) $value;
+			
 		}
-		else
-		{
-			$value = get_userdata($value);
-		}
+			
+		foreach( $value as $k => $v ) {
+			
+			$user_data = get_userdata( $v );
+			
+			$value[$k] = array();
+			$value[$k]['ID'] = $v;
+			$value[$k]['user_firstname'] = $user_data->user_firstname;
+			$value[$k]['user_lastname'] = $user_data->user_lastname;
+			$value[$k]['nickname'] = $user_data->nickname;
+			$value[$k]['user_nicename'] = $user_data->user_nicename;
+			$value[$k]['display_name'] = $user_data->display_name;
+			$value[$k]['user_email'] = $user_data->user_email;
+			$value[$k]['user_url'] = $user_data->user_url;
+			$value[$k]['user_registered'] = $user_data->user_registered;
+			$value[$k]['user_description'] = $user_data->user_description;
 
-		
-		
+		}
+			
 		// return value
 		return $value;
 
