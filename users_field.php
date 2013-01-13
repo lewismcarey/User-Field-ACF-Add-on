@@ -402,11 +402,26 @@ class Users_field extends acf_Field
 			$value = (array) $value;
 			
 		}
-			
+		
+		/*echo '<pre>';
+		print_r($value);
+		echo '</pre>';
+		
+		die();*/
+		
 		foreach( $value as $k => $v ) {
 			
 			$user_data = get_userdata( $v );
 			
+			//cope with deleted users by @adampope
+			if( ! is_object( $user_data ) ) {
+			
+				unset( $value[$k] );
+				
+				continue;
+		
+			}
+
 			$value[$k] = array();
 			$value[$k]['ID'] = $v;
 			$value[$k]['user_firstname'] = $user_data->user_firstname;
@@ -419,7 +434,7 @@ class Users_field extends acf_Field
 			$value[$k]['user_registered'] = $user_data->user_registered;
 			$value[$k]['user_description'] = $user_data->user_description;
 			$value[$k]['user_avatar'] = get_avatar( $v );
-
+			
 		}
 			
 		// return value
