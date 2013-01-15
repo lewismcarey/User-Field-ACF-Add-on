@@ -398,14 +398,8 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 			$value = $this->get_value( $post_id, $field );
 			
 			// format value
-			if ( ! $value ) {
-			
-				return false;
+			if ( ( ! $value ) || ( $value == 'null' ) ) {
 				
-			}
-			
-			if ( $value == 'null' ) {
-			
 				return false;
 				
 			}
