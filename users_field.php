@@ -22,8 +22,7 @@
  
 if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
  
-	class Users_field extends acf_Field
-	{
+	class Users_field extends acf_Field {
 	
 		/*--------------------------------------------------------------------------------------
 		*
@@ -36,14 +35,14 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 		* 
 		*-------------------------------------------------------------------------------------*/
 		
-		function __construct($parent)
-		{
+		function __construct( $parent ) {
+		
 			// do not delete!
-	    	parent::__construct($parent);
+	    	parent::__construct( $parent );
 	    	
 	    	// set name / title
 	    	$this->name = 'users_field'; // variable name (no spaces / special characters / etc)
-			$this->title = __("Users",'acf'); // field label (Displayed in edit screens)
+			$this->title = __( "Users", 'acf' ); // field label (Displayed in edit screens)
 			
 	   	}
 	
@@ -63,42 +62,43 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 		* 
 		*-------------------------------------------------------------------------------------*/
 		
-		function create_options($key, $field)
-		{
+		function create_options( $key, $field ) {
+		
 			//role_capability
 			// defaults
-			$field['role'] = isset($field['role']) ? $field['role'] : '';
-			$field['multiple'] = isset($field['multiple']) ? $field['multiple'] : '0';
-			$field['allow_null'] = isset($field['allow_null']) ? $field['allow_null'] : '0';
+			$field['role'] = isset( $field['role'] ) ? $field['role'] : '';
+			$field['multiple'] = isset( $field['multiple'] ) ? $field['multiple'] : '0';
+			$field['allow_null'] = isset( $field['allow_null'] ) ? $field['allow_null'] : '0';
 			
-			?>
+	?>
 			<tr class="field_option field_option_<?php echo $this->name; ?>">
 				<td class="label">
-					<label><?php _e("Filter by role",'acf'); ?></label>
+					<label><?php _e( "Filter by role", 'acf' ); ?></label>
 				</td>
 				<td>
+	
 	<?php 
-					$choices = array('' => '-All-');
+					$choices = array( '' => '-All-' );
 							
 					$editable_roles = get_editable_roles();
 	
-					foreach ( $editable_roles as $role => $details ) 
-					{
+					foreach ( $editable_roles as $role => $details ) {
 											
 						// only translate the output not the value
 						$choices[$role] = translate_user_role( $details['name'] );
 						
 					}
 					
-					$this->parent->create_field(array(
-						'type'	=>	'select',
-						'name'	=>	'fields['.$key.'][role]',
-						'value'	=>	$field['role'],
+					$this->parent->create_field( array(
+						'type' => 'select',
+						'name' => 'fields['.$key.'][role]',
+						'value'	=> $field['role'],
 						'choices' => array($choices),
 						'optgroup' => true,
-						'multiple'	=>	'1',
-					));
+						'multiple' => '1',
+					) );
 	?>
+	
 				</td>
 			</tr>
 			<tr class="field_option field_option_<?php echo $this->name; ?>">
@@ -106,40 +106,45 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 					<label><?php _e("Allow Null?",'acf'); ?></label>
 				</td>
 				<td>
+	
 	<?php 
-					$this->parent->create_field(array(
-						'type'	=>	'radio',
-						'name'	=>	'fields['.$key.'][allow_null]',
-						'value'	=>	$field['allow_null'],
-						'choices'	=>	array(
-							'1'	=>	'Yes',
-							'0'	=>	'No',
+					$this->parent->create_field( array(
+						'type' => 'radio',
+						'name' => 'fields['.$key.'][allow_null]',
+						'value'	=> $field['allow_null'],
+						'choices' => array(
+							'1'	=> 'Yes',
+							'0'	=> 'No',
 						),
-						'layout'	=>	'horizontal',
-					));
+						'layout' => 'horizontal',
+					)) ;
 	?>
+	
 				</td>
 			</tr>
 			<tr class="field_option field_option_<?php echo $this->name; ?>">
 				<td class="label">
-					<label><?php _e("Select multiple values?",'acf'); ?></label>
+					<label><?php _e( "Select multiple values?", 'acf' ); ?></label>
 				</td>
 				<td>
+	
 	<?php 
-					$this->parent->create_field(array(
-						'type'	=>	'radio',
-						'name'	=>	'fields['.$key.'][multiple]',
-						'value'	=>	$field['multiple'],
-						'choices'	=>	array(
-							'1'	=>	'Yes',
-							'0'	=>	'No',
+					$this->parent->create_field( array(
+						'type' => 'radio',
+						'name' => 'fields['.$key.'][multiple]',
+						'value'	=> $field['multiple'],
+						'choices' => array (
+							'1'	=> 'Yes',
+							'0'	=> 'No',
 						),
-						'layout'	=>	'horizontal',
-					));
+						'layout' => 'horizontal',
+					) );
 	?>
+	
 				</td>
 			</tr>
 	<?php
+	
 		}
 		
 		
@@ -154,11 +159,12 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 		* 
 		*-------------------------------------------------------------------------------------*/
 		
-		function pre_save_field($field)
-		{
+		function pre_save_field( $field ) {
+		
 			// do stuff with field (mostly format options data)
 			
-			return parent::pre_save_field($field);
+			return parent::pre_save_field( $field );
+			
 		}
 		
 		
@@ -172,33 +178,35 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 		* 
 		*-------------------------------------------------------------------------------------*/
 		
-		function create_field($field)
-		{
+		function create_field( $field ) {
+		
 			$editable_roles = get_editable_roles();
 			
-			$field['role'] = isset($field['role']) ? $field['role'] : false;
-			$field['multiple'] = isset($field['multiple']) ? $field['multiple'] : false;
+			$field['role'] = isset( $field['role'] ) ? $field['role'] : false;
+			$field['multiple'] = isset( $field['multiple'] ) ? $field['multiple'] : false;
 			
 			
-			if(!$field['role'] || !is_array($field['role']) || $field['role'][0] == "")
-			{
+			if ( ! $field['role'] || ! is_array( $field['role'] ) || $field['role'][0] == "" ) {
 				
 				$field['role'] = array();
-				foreach ( $editable_roles as $role => $details ) 
-				{
+				
+				foreach ( $editable_roles as $role => $details ) {
 					
-					if ($details['name'] != "") 
-					{
+					if ( $details['name'] != "" ) {
+						
 						$field['role'][] = $role ;
+						
 					}
+					
 				}
+				
 			}
-			
 		
 			// multiple select
 			$multiple = '';
-			if($field['multiple'] == '1')
-			{
+			
+			if ( $field['multiple'] == '1' ) {
+			
 				$multiple = ' multiple="multiple" size="5" ';
 				$field['name'] .= '[]';
 			} 
@@ -207,47 +215,49 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 			echo '<select id="' . $field['name'] . '" class="' . $field['class'] . '" name="' . $field['name'] . '" ' . $multiple . ' >';
 			
 			// null
-			if($field['allow_null'] == '1')
-			{
+			if ( $field['allow_null'] == '1' ) {
+			
 				echo '<option value="null"> - Select - </option>';
+				
 			}
 			
 			
-			foreach($field['role'] as $role)
-			{
+			foreach ( $field['role'] as $role ) {
+			
 				$label = $editable_roles[$role]['name'];
+				
 				// get users
 				$args = array(
 					'role' => $role	
 				);
 				
 				$users = get_users( $args );			
-					
 							
-				if($users)
-				{
+				if ( $users ) {
 					
-					echo '<optgroup label="'.translate_user_role($label).'">';
+					echo '<optgroup label="' . translate_user_role( $label ) . '">';
 	
-					foreach($users as $k => $user)
-					{
+					foreach ( $users as $k => $user ) {
+					
 						$key = $user->ID;
-						$value = ucfirst($user->display_name); 
+						$value = ucfirst( $user->display_name ); 
 						$selected = '';
 						
-						if(is_array($field['value']))
-						{
-							// 2. If the value is an array (multiple select), loop through values and check if it is selected
-							if(in_array($key, $field['value']))
-							{
+						if ( is_array( $field['value'] ) ) {
+							
+							// 2. If the value is an array (multiple select), 
+							// loop through values and check if it is selected
+							
+							if ( in_array( $key, $field['value'] ) ) {
+							
 								$selected = 'selected="selected"';
+								
 							}
-						}
-						else
-						{
+							
+						} else {
+							
 							// 3. this is not a multiple select, just check normaly
-							if($key == $field['value'])
-							{
+							if ( $key == $field['value'] ) {
 								$selected = 'selected="selected"';
 							}
 						}
@@ -255,16 +265,14 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 						echo '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
 	
 					} 
+					
 					echo '</optgroup>';
-	
+
 				}					
 								
-				
 			}// endforeach
 		
-	
 			echo '</select>';
-		
 			
 		}
 		
@@ -281,13 +289,15 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 		* 
 		*-------------------------------------------------------------------------------------*/
 		
-		function admin_head()
-		{
-			if ( !function_exists('get_editable_roles') ) 
-			{ 
+		function admin_head() {
+		
+			if ( ! function_exists( 'get_editable_roles' ) ) { 
+			
 				// if using front-end forms then we need to add this core file
 				require_once( ABSPATH . '/wp-admin/includes/user.php' ); 
+				
 			}
+			
 		}
 		
 		
@@ -303,13 +313,11 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 		* 
 		*-------------------------------------------------------------------------------------*/
 		
-		function admin_print_scripts()
-		{
+		function admin_print_scripts() {
 		
 		}
 		
-		function admin_print_styles()
-		{
+		function admin_print_styles() {
 			
 		}
 	
@@ -331,16 +339,14 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 		* 
 		*-------------------------------------------------------------------------------------*/
 		
-		function update_value($post_id, $field, $value)
-		{
+		function update_value( $post_id, $field, $value ) {
+
 			// do stuff with value
 			
 			// save value
-			parent::update_value($post_id, $field, $value);
+			parent::update_value( $post_id, $field, $value );
+			
 		}
-		
-		
-		
 		
 		
 		/*--------------------------------------------------------------------------------------
@@ -358,15 +364,16 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 		* 
 		*-------------------------------------------------------------------------------------*/
 		
-		function get_value($post_id, $field)
-		{
+		function get_value( $post_id, $field ) {
+		
 			// get value
-			$value = parent::get_value($post_id, $field);
+			$value = parent::get_value( $post_id, $field );
 			
 			// format value
 			
 			// return value
-			return $value;		
+			return $value;
+					
 		}
 		
 		
@@ -385,28 +392,29 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 		* 
 		*-------------------------------------------------------------------------------------*/
 		
-		function get_value_for_api($post_id, $field)
-		{
+		function get_value_for_api( $post_id, $field ) {
+		
 			// get value
-			$value = $this->get_value($post_id, $field);
+			$value = $this->get_value( $post_id, $field );
 			
 			// format value
+			if ( ! $value ) {
 			
-			if(!$value)
-			{
 				return false;
+				
 			}
 			
-			if($value == 'null')
-			{
+			if ( $value == 'null' ) {
+			
 				return false;
+				
 			}
 			
-			if(is_array($value))
-			{
-				foreach($value as $k => $v)
-				{
-					$user_data = get_userdata($v);
+			if ( is_array( $value ) ) {
+			
+				foreach( $value as $k => $v ) {
+				
+					$user_data = get_userdata( $v );
 					$value[$k] = array();
 					$value[$k]['ID'] = $v;
 					$value[$k]['user_firstname'] = $user_data->user_firstname;
@@ -420,14 +428,13 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 					$value[$k]['user_description'] = $user_data->user_description;
 	
 				}
+				
+			} else {
+
+				$value = get_userdata( $value );
+				
 			}
-			else
-			{
-				$value = get_userdata($value);
-			}
-	
-			
-			
+
 			// return value
 			return $value;
 	
