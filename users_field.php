@@ -404,28 +404,31 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 				
 			}
 			
-			if ( is_array( $value ) ) {
+			foreach ( $value as $k => $v ) {
 			
-				foreach( $value as $k => $v ) {
+				$user_data = get_userdata( $v );
 				
-					$user_data = get_userdata( $v );
-					$value[$k] = array();
-					$value[$k]['ID'] = $v;
-					$value[$k]['user_firstname'] = $user_data->user_firstname;
-					$value[$k]['user_lastname'] = $user_data->user_lastname;
-					$value[$k]['nickname'] = $user_data->nickname;
-					$value[$k]['user_nicename'] = $user_data->user_nicename;
-					$value[$k]['display_name'] = $user_data->display_name;
-					$value[$k]['user_email'] = $user_data->user_email;
-					$value[$k]['user_url'] = $user_data->user_url;
-					$value[$k]['user_registered'] = $user_data->user_registered;
-					$value[$k]['user_description'] = $user_data->user_description;
-	
+				//cope with deleted users by @adampope
+				if ( ! is_object( $user_data ) ) {
+				
+					unset( $value[$k] );
+					
+					continue;
+			
 				}
-				
-			} else {
-
-				$value = get_userdata( $value );
+	
+				$value[ $k ] = array();
+				$value[ $k ]['ID'] = $v;
+				$value[ $k ]['user_firstname'] = $user_data->user_firstname;
+				$value[ $k ]['user_lastname'] = $user_data->user_lastname;
+				$value[ $k ]['nickname'] = $user_data->nickname;
+				$value[ $k ]['user_nicename'] = $user_data->user_nicename;
+				$value[ $k ]['display_name'] = $user_data->display_name;
+				$value[ $k ]['user_email'] = $user_data->user_email;
+				$value[ $k ]['user_url'] = $user_data->user_url;
+				$value[ $k ]['user_registered'] = $user_data->user_registered;
+				$value[ $k ]['user_description'] = $user_data->user_description;
+				$value[ $k ]['user_avatar'] = get_avatar( $v );
 				
 			}
 
