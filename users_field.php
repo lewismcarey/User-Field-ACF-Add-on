@@ -20,7 +20,7 @@
  *
  */
  
-if( !class_exists( 'Users_field' ) && class_exists( 'acf_Field' ) ) :
+if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
  
 	class Users_field extends acf_Field
 	{
@@ -435,6 +435,6 @@ if( !class_exists( 'Users_field' ) && class_exists( 'acf_Field' ) ) :
 		
 	}
 
-endif;
+}
 
 ?>
