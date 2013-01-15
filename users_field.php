@@ -91,9 +91,9 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 					
 					$this->parent->create_field( array(
 						'type' => 'select',
-						'name' => 'fields['.$key.'][role]',
+						'name' => 'fields[' . $key . '][role]',
 						'value'	=> $field['role'],
-						'choices' => array($choices),
+						'choices' => array( $choices ),
 						'optgroup' => true,
 						'multiple' => '1',
 					) );
@@ -103,14 +103,14 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 			</tr>
 			<tr class="field_option field_option_<?php echo $this->name; ?>">
 				<td class="label">
-					<label><?php _e("Allow Null?",'acf'); ?></label>
+					<label><?php _e( "Allow Null?", 'acf' ); ?></label>
 				</td>
 				<td>
 	
 	<?php 
 					$this->parent->create_field( array(
 						'type' => 'radio',
-						'name' => 'fields['.$key.'][allow_null]',
+						'name' => 'fields['.  $key . '][allow_null]',
 						'value'	=> $field['allow_null'],
 						'choices' => array(
 							'1'	=> 'Yes',
@@ -131,7 +131,7 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 	<?php 
 					$this->parent->create_field( array(
 						'type' => 'radio',
-						'name' => 'fields['.$key.'][multiple]',
+						'name' => 'fields[' . $key . '][multiple]',
 						'value'	=> $field['multiple'],
 						'choices' => array (
 							'1'	=> 'Yes',
@@ -224,7 +224,7 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 			
 			foreach ( $field['role'] as $role ) {
 			
-				$label = $editable_roles[$role]['name'];
+				$label = $editable_roles[ $role]['name'];
 				
 				// get users
 				$args = array(
@@ -262,7 +262,7 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 							}
 						}
 						
-						echo '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
+						echo '<option value="' . $key . '" ' . $selected . '>' . $value . '</option>';
 	
 					} 
 					
