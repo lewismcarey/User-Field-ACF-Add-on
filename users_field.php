@@ -404,6 +404,9 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 				
 			}
 			
+			// make sure that whats returned is an array
+			$value = (array) $value;
+			
 			foreach ( $value as $k => $v ) {
 			
 				$user_data = get_userdata( $v );
