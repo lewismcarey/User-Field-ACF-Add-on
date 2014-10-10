@@ -1,3 +1,6 @@
+# Please Note that User Fields got brought into the core ACF in version 4 
+
+
 === Advanced Custom Fields - Users Multi-Select Field add-on ===
 
 Contributors: by @lewismcarey (@forepoint)
