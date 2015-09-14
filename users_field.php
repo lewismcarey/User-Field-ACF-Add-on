@@ -186,7 +186,7 @@ if ( class_exists( 'acf_Field' ) && ! class_exists( 'Users_field' ) ) {
 			$field['multiple'] = isset( $field['multiple'] ) ? $field['multiple'] : false;
 			
 			
-			if ( ! $field['role'] || ! is_array( $field['role'] ) || $field['role'][0] == "" ) {
+			if ( empty($field['role']) ) {
 				
 				$field['role'] = array();
 				
